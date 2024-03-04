@@ -9,12 +9,16 @@ from game.logic.random import RandomLogic
 from game.util import *
 from game.logic.base import BaseLogic
 from game.logic.aldy import AldyDPP
+from game.logic.naive_avoidbots import NaiveAvoidBots
+from game.logic.botRafly import PricePerLength
 
 init()
 BASE_URL = "http://localhost:3000/api"
 DEFAULT_BOARD_ID = 1
 CONTROLLERS = {
     "Random": RandomLogic,
+    "n_ab": NaiveAvoidBots,
+    "RAFLY": PricePerLength,
     "ALDY": AldyDPP
 }
 
@@ -161,7 +165,7 @@ if not current_board_id:
 #
 ###############################################################################
 board = board_handler.get_board(current_board_id)
-move_delay = board.minimum_delay_between_moves / 1000
+move_delay = board.minimum_delay_between_moves / (1000 * 4)
 
 ###############################################################################
 #
