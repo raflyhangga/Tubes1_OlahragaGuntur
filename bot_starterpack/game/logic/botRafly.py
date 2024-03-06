@@ -1,15 +1,8 @@
 from game.logic.base import BaseLogic
 from game.models import Board, GameObject, Position, Properties
-from typing import Optional, Tuple, List
+from typing import Tuple
 from ..util import get_direction
-import random, sys
-import numpy as np
-
-"""
-TO-DO:
-1. Pulang ke base terus ketemu teleporter jadi ngeloop
-2. Evade dari bot yang mau nginjek
-"""
+import sys
 
 class greedyGanteng(BaseLogic):
     def __init__(self) -> None:
@@ -23,12 +16,16 @@ class greedyGanteng(BaseLogic):
         # Return the length from current position to pos1
         deltaX = abs(pos1.x - self.current_position.x)
         deltaY = abs(pos1.y - self.current_position.y)
-        return (deltaX**2 + deltaY**2)**(1/2)
+        return deltaX + deltaY
     
 
     def go_to_base(self,board_bot: GameObject, board: Board) -> Tuple[int,int]:
+        # Mencari posisi dari base
         base = board_bot.properties.base
         self.goal_position = base
+
+        # Fungsi Solusi
+        # mengembalikan langkah selanjutnya yang harus ditempuh oleh bot
         delta_x, delta_y = get_direction(
                 self.current_position.x,
                 self.current_position.y,
@@ -52,7 +49,7 @@ class PricePerLength(greedyGanteng):
         # Kelayakan dinilai dengan nilai diamond + diamond yang sudah ada <= ukuran inventory
         existing_diamonds = [diamond for diamond in self.current_board.diamonds if diamond.properties.points + self.player_bot.properties.diamonds <= self.player_bot.properties.inventory_size]
         
-        # Fungsi Obyektif
+        # Fungsi Seleksi
         # memilih nilai maksimum dari seluruh rasio nilai diamond dengan jarak dari seluruh himpunan diamond
         nearest_diamond = max(existing_diamonds, key= lambda x : self.getPricePerLength(x.position,x.properties)) 
 
