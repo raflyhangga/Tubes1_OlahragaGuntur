@@ -95,8 +95,25 @@ class PricePerLength(greedyGanteng):
         self.current_position = board_bot.position
         self.player_bot = board_bot
         self.current_board = board
+
+        bx,by = board_bot.properties.base.x, board_bot.properties.base.y
+        base_pos = Position(by, bx)
+
+        # If distance to home is super close and diamonds > 0, go home immedieately
+        if self.player_bot.properties.diamonds > 1 and self.getLength(base_pos) < 2:
+            return self.goToBase(board_bot, board)
+        elif self.player_bot.properties.diamonds > 0 and self.getLength(base_pos) <= 1 :
+            return self.gotBase(board_bot, board)
+
+
+        # If time is 10 seconds or less, diamonds not empty, go home
+        time_left = self.player_bot.properties.milliseconds_left // 1000
+        if time_left < 10 and self.player_bot.properties.diamonds > 0:
+            return self.goToBase(board_bot, board)
+
+
         if not self.isInventoryFull(board_bot):
             return self.goToPPLDiamond()
         else:
             return self.goToBase(board_bot,board)
-        
+
