@@ -1,8 +1,9 @@
 <h1 align="center">Tubes1_OlahragaGuntur<h1/>
 
-<p>This project is for logical implementation for [💎 diamonds game](https://github.com/haziqam/tubes1-IF2211-game-engine/releases/tag/v1.1.0) using greedy strategy in order to get the maximum amount of diamond in a certain point of time. 
+# 💫 Project Description
+This project is **logical implementation** for [💎 diamonds game](https://github.com/haziqam/tubes1-IF2211-game-engine/releases/tag/v1.1.0) using greedy strategy in order to get the maximum amount of diamond in a certain point of time. 
 
-This bot implements a ***Price Per Length*** strategy in order to get the nearest diamond with the greatest value. 🤑🤑🤑<p/>
+This bot implements a ***Price Per Length*** strategy in order to get the nearest diamond with the greatest value. 🤑🤑🤑
 
 # 🏃🏻‍♂️ Running the Bot 
 1. Make sure that you have the **Game Engine** installed and running properly.
